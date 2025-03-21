@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>
+        Lingo Tour | Breaking Language Barriers
+    </title>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=Poppins:wght@300;400;500&amp;display=swap" rel="stylesheet"/>
+    <style>
+        :root {
+            --primary: #bda49a;
+            --secondary: #e6b325;
+            --light: #f5f5f5;
+            --dark: #1a1a2e;
+            --accent: #f0cbbe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #341f1f;
+            background-color: var(--light);
+        }
+
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .language-selector {
+            position: relative;
+            margin-left: 2rem;
+        }
+
+        .language-selector select {
+            appearance: none;
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 2rem 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .language-selector::after {
+            content: '▼';
+            font-size: 0.7rem;
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--secondary);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(220, 185, 175, 0.7), rgba(15, 52, 96, 0.7)), url('https://placehold.co/1920x1080') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 5%;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            animation: fadeIn 1s ease-in 0.3s forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            background-color: var(--secondary);
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.3s;
+            border: 2px solid var(--secondary);
+            animation: fadeIn 1s ease-in 0.6s forwards;
+            opacity: 0;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--secondary);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .section-title {
+            text-align: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin: 3rem 0;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--secondary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .features {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+
+        .features-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            flex: 1;
+            background-color: var(--light);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+
+        .destinations {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .destination-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .destination-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .destination-info {
+            padding: 1.5rem;
+        }
+
+        .destination-info h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .destination-info p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .destination-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .destination-rating {
+            color: var(--secondary);
+        }
+
+        .translate-feature {
+            padding: 5rem 5%;
+            background-color: var(--accent);
+            color: white;
+            text-align: center;
+        }
+
+        .translate-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+            background-color: rgba(255,255,255,0.1);
+            padding: 2rem;
+            border-radius: 8px;
+        }
+
+        .translate-demo {
+            display: flex;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+
+        .translate-column {
+            flex: 1;
+        }
+
+        .translate-box {
+            background-color: white;
+            color: var(--dark);
+            padding: 1rem;
+            border-radius: 4px;
+            height: 150px;
+            text-align: left;
+        }
+
+        .translate-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 5% 1rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-column h3 {
+            font-family: 'Playfair Display', serif;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #999;
+        }
+
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .features-container {
+                flex-direction: column;
+            }
+
+            .translate-demo {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a class="logo" href="#">
+        Lingo
+        <span>
+            Tour
+        </span>
+    </a>
+    <div class="language-selector">
+        <select>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="de">Deutsch</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
+        </select>
+    </div>
+</header>
+<section class="hero">
+    <h1>
+        Travel Without Language Barriers
+    </h1>
+    <p>
+        Explore the world with confidence. Our advanced translation technology helps you communicate effortlessly in over 50 languages, making every journey smooth and enjoyable.
+    </p>
+    <div>
+        <a class="btn" href="#destinations">Explore Destinations</a>
+        <a class="btn btn-outline" href="#translate">Try Translator</a>
+    </div>
+</section>
+<section class="features" id="features">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">🌐</div>
+            <h3>Real-time Translation</h3>
+            <p>Instant voice and text translation in over 50 languages, even offline. Never worry about communication barriers again.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">🗣️</div>
+            <h3>Cultural Insights</h3>
+            <p>Get cultural context and etiquette tips for each destination to help you blend in and avoid faux pas.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Smart Itineraries</h3>
+            <p>AI-powered trip planning that adapts to your preferences, language skills, and comfort level in foreign environments.</p>
+        </div>
+    </div>
+</section>
+<section class="destinations" id="destinations">
+    <h2 class="section-title">Popular Destinations</h2>
+    <div class="destinations-grid">
+        <div class="destination-card">
+            <img alt="Tokyo, Japan" class="destination-img" src="Why Tokyo is the Best Place to Visit_ A Perfect Blend of Tradition, Innovation, and Adventure.jpeg"/>
+            <div class="destination-info">
+                <h3>Tokyo, Japan</h3>
+                <p>Experience the perfect blend of traditional culture and futuristic technology in Japan's vibrant capital.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★★</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="destination-card">
+            <img alt="Paris, France" class="destination-img" src="POV_ you’re in Paris.jpeg"/>
+            <div class="destination-info">
+                <h3>Paris, France</h3>
+                <p>Discover the city of love with its iconic landmarks, world-class cuisine, and charming neighborhoods.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★★</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="destination-card">
+            <img alt="Barcelona, Spain" class="destination-img" src="Barcelona _ Spain - Gothic Quarter - Barcelona Cathedral.jpeg"/>
+            <div class="destination-info">
+                <h3>Barcelona, Spain</h3>
+                <p>Enjoy the unique architecture, Mediterranean beaches, and vibrant street life in this Catalan gem.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★☆</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="destination-card">
+            <img alt="Bangkok, Thailand" class="destination-img" src="Explore Bangkok - insider tips, best hotels, scenic restaurants, shopping malls.jpeg"/>
+            <div class="destination-info">
+                <h3>Bangkok, Thailand</h3>
+                <p>Immerse yourself in the bustling streets, ornate temples, and delicious street food of Thailand's capital.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★☆</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="destination-card">
+            <img alt="Rome, Italy" class="destination-img" src="88d8e87a-adfa-4be6-99cd-4d77f8612faf.jpeg"/>
+            <div class="destination-info">
+                <h3>Rome, Italy</h3>
+                <p>Walk through history in the Eternal City with its ancient ruins, Renaissance art, and world-famous cuisine.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★★</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+        <div class="destination-card">
+            <img alt="Istanbul, Turkey" class="destination-img" src="İstanbul.jpeg"/>
+            <div class="destination-info">
+                <h3>Istanbul, Turkey</h3>
+                <p>Experience the fascinating blend of European and Asian cultures in this historic city straddling two continents.</p>
+                <div class="destination-meta">
+                    <span class="destination-rating">★★★★☆</span>
+                    <a class="btn" href="#">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="translate-feature" id="translate">
+    <h2 class="section-title">Experience Our Translation Technology</h2>
+    <p>Try our real-time translation feature that makes communication effortless in any country.</p>
+    <div class="translate-container">
+        <div class="translate-demo">
+            <div class="translate-column">
+                <h3>English</h3>
+                <div class="translate-box" contenteditable="true">
+                    Type something here to see it translated in real-time. Our technology works with over 50 languages.
+                </div>
+            </div>
+            <div class="translate-column">
+                <h3>Translation</h3>
+                <div class="translate-box">
+                    Écrivez quelque chose ici pour le voir traduit en temps réel. Notre technologie fonctionne avec plus de 50 langues.
+                </div>
+            </div>
+        </div>
+        <div class="translate-controls">
+            <select id="language-select">
+                <option value="fr">French</option>
+                <option value="es">Spanish</option>
+                <option value="de">German</option>
+                <option value="it">Italian</option>
+                <option value="ja">Japanese</option>
+                <option value="zh">Chinese</option>
+            </select>
+            <button class="btn" id="translate-button">Translate</button>
+        </div>
+    </div>
+</section>
+<section id="virtual-tours">
+    <h2>Virtual Tours</h2>
+    <video id="tour-video" controls style="width: 80%; max-width: 600px; margin: 2rem auto; display: block;">
+        <source src="WhatsApp Video 2025-03-21 at 8.06.30 AM.mp4" type="video/mp4">
+        <track src="subtitles.vtt" kind="subtitles" srclang="en" label="English" default>
+        Your browser does not support the video tag.
+    </video>
+    <div id="subtitles"></div>
+</section>
+<footer>
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>About Us</h3>
+            <ul>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Careers</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+                <li><a href="#">Translation</a></li>
+                <li><a href="#">Cultural Insights</a></li>
+                <li><a href="#">Itinerary Planning</a></li>
+            </ul>
+        </div>
+        <div class="footer-column">
+            <h3>Contact</h3>
+            <ul>
+                <li><a href="#">Support</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Feedback</a></li>
+            </ul>
+        </div>
+    </div>
+    
+</footer>
+<script>
+    document.getElementById('translate-button').addEventListener('click', function() {
+        const text = document.querySelector('.translate-column .translate-box[contenteditable="true"]').innerText;
+        const targetLanguage = document.getElementById('language-select').value;
+
+        fetch('/translate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text, targetLanguage })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.querySelector('.translate-column .translate-box:not([contenteditable])').innerText = data.translatedText;
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>
